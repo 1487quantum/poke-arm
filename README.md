@@ -6,8 +6,10 @@ An experimental gazebo robotic arm model with 4 movable joints. Designed to be m
 
 ![poke_arm_main](poke_arm_gazebo.png)
 
+> Currently, this package is only tested with Ubuntu 14.04 running Gazebo 2.2 & ROS Indigo.
+
 ## Installation
-Git clone the repository to your workspace. There is no need to *catkin_make* the files.
+Git clone the repository to your workspace.
 ```
 $ git clone https://github.com/1487quantum/poke-arm-gazebo.git
 ```
@@ -57,7 +59,21 @@ The folder are organised into 3 parts:
 - poke_control: Contains the controllers used to control the poke arm.
 
 ## Testing
-[Coming soon...]
+To test the poke arm, roslaunch *poke_control.launch*. This will launch both the arm model and the controller in Gazebo.
+```
+$ roslaunch poke_control poke_control.launch
+```
+
+To retract the arm:
+```
+$ rostopic pub /arm_controller/command trajectory_msgs/JointTrajectory '{joint_names: ["p0_joint","p1_joint","p2_joint"], points: [{positions: [-1.2,2.5,0.6],time_from_start:[1.0,0.0]}]}' -1
+```
+
+To extend the arm:
+```
+$ rostopic pub /arm_controller/command trajectory_msgs/JointTrajectory '{joint_names: ["p0_joint","p1_joint","p2_joint"], points: [{positions: [1.2,0.2,0.6],time_from_start:[1.0,0.0]}]}' -1
+```
+
 
 ## Mounting on Turtlebot
 [Coming soon...]
