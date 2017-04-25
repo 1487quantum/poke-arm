@@ -4,7 +4,7 @@
 
 An experimental gazebo robotic arm model with 4 movable joints. Designed to be mounted on the Turtlebot gazebo model.
 
-![poke_arm_main](poke_arm_gazebo.png)
+![poke_arm_main](img/pa_main.png)
 
 > Currently, this package is only tested with Ubuntu 14.04 running Gazebo 2.2 & ROS Indigo.
 
@@ -21,37 +21,9 @@ Joints on the arm:
 - 3 *revolute* joints
 - 1 *continuous* joint
 
-```
-*****************************
-*   Poke Arm Schematic v0.1 *
-*****************************
+![poke_arm_joints](img/pa_joints.png)
 
-       _
-      |_|         <---- p3_link & p3_joint (Continuous)                 
-     |   |        <---- p2_link                             
-     !   !                                                  
-     -----                                    
-    (     )       <---- p2 joint (Revolute)                                                       
-     -----
-     |   |  
-     |   |        <---- p1_link
-     |   |  
-     !   !  
-     -----
-    (     )       <---- p1_joint (Revolute)
-     -----
-     |   |  
-     |   |        <---- p0_link
-     |   |  
-     !   !  
-     -----
-    (     )       <---- p0_joint (Revolute)
-     -----
-   =========
-   #       #      <---- baseMount_link  (Fixed)
-   =========
 
-```
 ## File structure
 The folder are organised into 3 parts:
 - poke_description: Contains the URDF description of the robot.
@@ -63,6 +35,7 @@ To test the poke arm, roslaunch *poke_control.launch*. This will launch both the
 ```
 $ roslaunch poke_control poke_control.launch
 ```
+![poke_arm_pose](img/pa_pose.png)
 
 To retract the arm:
 ```
