@@ -1,24 +1,29 @@
-<launch>
-  <!-- Publish this for testing the controller:
-  Ready position:
-  $ rostopic pub /arm_controller/command trajectory_msgs/JointTrajectory '{joint_names: ["p0_joint","p1_joint","p2_joint"], points: [{positions: [-1.2,2.5,0.6],time_from_start:[1.0,0.0]}]}' -1
-  Push:
-  $ rostopic pub /arm_controller/command trajectory_msgs/JointTrajectory '{joint_names: ["p0_joint","p1_joint","p2_joint"], points: [{positions: [1.2,0.2,0.6],time_from_start:[1.0,0.0]}]}' -1
-  -->
-  <!-- Load joint controller configurations from YAML file to parameter server -->
-  <rosparam file="$(find poke_control)/config/poke_control.yaml" command="load"/>
+<?xml version="1.0"?>
+<!-- URDF xacro of the poke arm. Use this file for creation/modification of urdf or moveit config.
+  Use the following command to generate the urdf file:  $ rosrun xacro xacro.py poke_old.xacro -o poke.urdf
+                                    To check the urdf:  $ check_urdf poke.urdf
+                                   Export urdf to pdf:  $ urdf_to_graphiz poke.urdf
+-->
+<robot name="poke_arm" xmlns:xacro="http://ros.org/wiki/xacro"
+    xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+    xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+    xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
 
-  <!--Gazebo launch-->
-  <include file="$(find poke_gazebo)/launch/poke_world.launch"/>
+    <!-- Included URDF Files -->
+    <xacro:include filename="$(find poke_description)/urdf/poke.xacro" />
 
-  <!-- load the controllers -->
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-	output="screen" args="arm_controller"/>
+    <!--
+    For simulating only the arm, we'll use "world" as the link name.
+    For using it on the turtlebot, use "base_link" as the link name.
+    -->
 
-  <!-- convert joint states to TF transforms for rviz, etc -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
-	respawn="false" output="screen">
-  </node>
+    <!-- As we don't have here a turtlebot, add a base_link link as its location reference -->
+    <link name="world"/>
 
-
-</launch>
+    <!-- Poke arm macro: we can configure joints velocity limit -->
+    <poke_arm parent="world" color="white" joints_vlimit="1.571">
+      <!-- Place the "floating" arm at the location it should be if mounted on a turtlebot -->
+      <!-- origin xyz="0.1 0.03 0.435"/-->
+      <origin xyz="0 0 0"/>
+    </poke_arm>
+</robot>
