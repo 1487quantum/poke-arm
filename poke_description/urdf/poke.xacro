@@ -66,6 +66,7 @@
   <mtrT jointName="p0_joint"/>
   <mtrT jointName="p1_joint"/>
   <mtrT jointName="p2_joint"/>
+  <mtrT jointName="p3_joint"/>
 
   </xacro:macro>
 </robot>

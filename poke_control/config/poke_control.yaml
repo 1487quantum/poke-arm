@@ -5,3 +5,4 @@ arm_controller:
       - p0_joint
       - p1_joint
       - p2_joint
+      - p3_joint

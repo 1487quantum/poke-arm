@@ -137,6 +137,7 @@
   <!-- macro for continuous segment -->
   <xacro:macro name="cSeg" params="parent name color">
     <joint name="${name}_joint" type="continuous">
+      <axis xyz="0 0 1" />
       <parent link="${parent}"/>
       <child link="${name}_link" />
       <origin rpy="0 0 0" xyz="0.0 0.0 ${l2+jr/2}" />
