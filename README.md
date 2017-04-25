@@ -31,6 +31,7 @@ The folder are organised into 3 parts:
 - poke_control: Contains the controllers used to control the poke arm.
 
 ## Testing
+### Via *rostopic*
 To test the poke arm, roslaunch *poke_control.launch*. This will launch both the arm model and the controller in Gazebo.
 ```
 $ roslaunch poke_control poke_control.launch
@@ -47,6 +48,17 @@ To extend the arm:
 $ rostopic pub /arm_controller/command trajectory_msgs/JointTrajectory '{joint_names: ["p0_joint","p1_joint","p2_joint"], points: [{positions: [1.2,0.2,0.6],time_from_start:[1.0,0.0]}]}' -1
 ```
 
+### Via *Rviz*
+To test the arm via Rviz, roslaunch *poke_moveit_control.launch*. This utilises the moveit_group to plan & execute the motion of the arm determined by the interactive marker of Rviz.
+```
+$ roslaunch poke_control poke_moveit_control.launch
+```
+![poke_arm_rviz](img/pa_rviz.png)
 
-## Mounting on Turtlebot
-[Coming soon...]
+The rqt_graph:
+
+![poke_arm_rviz](img/pa_rviz_moveit_rqt.png)
+
+
+## Mounting *Poke arm* on Turtlebot
+[A few steps closer now, stay tune!]
