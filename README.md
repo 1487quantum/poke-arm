@@ -1,7 +1,5 @@
 # poke-arm-gazebo
 
-> NOTE: This package is still undergoing development.
-
 An experimental gazebo robotic arm model with 4 movable joints. Designed to be mounted on the Turtlebot gazebo model.
 
 ![poke_arm_main](img/pa_main.png)
