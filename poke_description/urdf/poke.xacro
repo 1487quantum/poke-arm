@@ -1,11 +1,5 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
-  <!-- Imports -->
-  <!-- Get parts from the hardware xacro file -->
-  <xacro:include filename="$(find poke_description)/urdf/poke_hardware.xacro"/>
-  <!-- Gazebo settings -->
-  <xacro:include filename="$(find poke_description)/urdf/poke.gazebo"/>
-
   <!-- Var -->
   <xacro:property name="PI" value="3.14159"/>
   <xacro:property name="rb" value="0.05" />        <!-- Cylinder Radius Base -->
@@ -14,7 +8,16 @@
   <xacro:property name="jr" value="${1.5*r0}" />   <!-- Joint cylinder Radius -->
   <xacro:property name="l1" value="0.2" />         <!-- Cylinder Length Primary-->
   <xacro:property name="l2" value="0.1" />         <!-- Cylinder Length Secondary-->
-  <xacro:property name="mass" value="0.5" />       <!-- arbitrary value for mass -->
+  <xacro:property name="mass" value="1e-2" />       <!-- arbitrary value for mass -->
+
+  <xacro:property name="cam_name" value="cameraB"/>
+
+  <!-- Imports -->
+  <!-- Get parts from the hardware xacro file -->
+  <xacro:include filename="$(find poke_description)/urdf/poke_hardware.xacro"/>
+  <!-- Gazebo settings -->
+  <xacro:include filename="$(find poke_description)/urdf/poke.gazebo"/>
+
 
   <material name="white">
     <color rgba="0.87 0.90 0.87 1.0"/>
@@ -61,6 +64,10 @@
     llimit="-${2/3*PI}" ulimit="${2/3*PI}" vlimit="5"/>
   <!-- Wrist [p3] -->
   <cSeg parent="p2_link" name="p3" color="green"/>
+
+  <!-- Camera -->
+  <cam parent="p3_link" name="${cam_name}" />
+  <cam_gazebo camName="${cam_name}" />
 
   <!-- Motor Transmission -->
   <mtrT jointName="p0_joint"/>
