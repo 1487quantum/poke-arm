@@ -1,6 +1,6 @@
 # poke-arm-gazebo
 
-An experimental gazebo robotic arm model with 4 movable joints. Designed to be mounted on the Turtlebot gazebo model.
+An experimental gazebo robotic arm model with 4 movable joints and a depth camera. Designed to be mounted on the Turtlebot gazebo model.
 
 ![poke_arm_main](img/pa_main.png)
 
@@ -11,25 +11,31 @@ The *poke arm* model depends on the following packages:
 - Gazebo ROS Packages
 - ROS Controllers 
 - MoveIt!
-```
+```bash
 $ sudo apt-get install ros-indigo-gazebo-ros-*
 $ sudo apt-get install ros-indigo-ros-controllers
 $ sudo apt-get install ros-indigo-moveit
 ```
 After that, git clone the repository to your workspace.
-```
+```bash
 $ git clone https://github.com/1487quantum/poke-arm-gazebo.git
 ```
 
 ## Overview
-The poke arm is designed to push an object, therefore the *revolute* joints can only be moved in the x-axis direction.
-Joints on the arm:
+### Joints
+The poke arm is designed to push an object, therefore the *revolute* joints were configured to move in the x-axis direction.
 - 1 *fixed* joint
 - 3 *revolute* joints
 - 1 *continuous* joint
 
 ![poke_arm_joints](img/pa_joints.png)
 
+### Camera
+A RGBD (Depth) Camera is mounted at the end of the robot arm. 
+```
+Camera Resolution: 320 X 240
+Image Range: 0.01 - 18.0m
+```
 
 ## File structure
 The folder are organised into 3 parts:
@@ -40,18 +46,18 @@ The folder are organised into 3 parts:
 ## Testing
 ### Via *rostopic*
 To test the poke arm, roslaunch *poke_control.launch*. This will launch both the arm model and the controller in Gazebo.
-```
+```bash
 $ roslaunch poke_control poke_control.launch
 ```
 ![poke_arm_pose](img/pa_pose.png)
 
 To retract the arm:
-```
+```bash
 $ rostopic pub /arm_controller/command trajectory_msgs/JointTrajectory '{joint_names: ["p0_joint","p1_joint","p2_joint"], points: [{positions: [-1.2,2.5,0.6],time_from_start:[1.0,0.0]}]}' -1
 ```
 
 To extend the arm:
-```
+```bash
 $ rostopic pub /arm_controller/command trajectory_msgs/JointTrajectory '{joint_names: ["p0_joint","p1_joint","p2_joint"], points: [{positions: [1.2,0.2,0.6],time_from_start:[1.0,0.0]}]}' -1
 ```
 
@@ -76,7 +82,7 @@ To mount the *Poke arm* on Turtlebot, you have to modify some files in the *turt
 > turtlebot/turtlebot_description/robots/kobuki_hexagons_asus_xtion_pro.urdf.xacro
 
 To add the arm, we'll add the *<poke_arm>* into the file. Therefore, the file should look like this:
-```
+```xml
 <?xml version="1.0"?>
 <!--
     - Base      : kobuki
