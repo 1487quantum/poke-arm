@@ -7,7 +7,16 @@ An experimental gazebo robotic arm model with 4 movable joints. Designed to be m
 > Currently, this package is only tested with Ubuntu 14.04 running Gazebo 2.2 & ROS Indigo.
 
 ## Installation
-Git clone the repository to your workspace.
+The *poke arm* model depends on the following packages:
+- Gazebo ROS Packages
+- ROS Controllers 
+- MoveIt!
+```
+$ sudo apt-get install ros-indigo-gazebo-ros-*
+$ sudo apt-get install ros-indigo-ros-controllers
+$ sudo apt-get install ros-indigo-moveit
+```
+After that, git clone the repository to your workspace.
 ```
 $ git clone https://github.com/1487quantum/poke-arm-gazebo.git
 ```
