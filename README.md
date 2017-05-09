@@ -1,6 +1,6 @@
 # poke-arm-gazebo
 
-An experimental gazebo robotic arm model with 4 movable joints and a depth camera. Designed to be mounted on the Turtlebot gazebo model.
+An experimental gazebo robotic arm model with 4 movable joints and a depth camera. Designed to be mounted on the Turtlebot gazebo model with only a forward extension capability.
 
 ![poke_arm_main](img/pa_main.png)
 
@@ -31,7 +31,7 @@ The poke arm is designed to push an object, therefore the *revolute* joints were
 ![poke_arm_joints](img/pa_joints.png)
 
 ### Camera
-A RGBD (Depth) Camera is mounted at the end of the robot arm. 
+A RGBD (Depth) Camera is mounted at the end of the robot arm. :camera:
 ```
 Camera Resolution: 320 X 240
 Image Range: 0.01 - 18.0m
@@ -53,12 +53,12 @@ $ roslaunch poke_control poke_control.launch
 
 To retract the arm:
 ```bash
-$ rostopic pub /arm_controller/command trajectory_msgs/JointTrajectory '{joint_names: ["p0_joint","p1_joint","p2_joint"], points: [{positions: [-1.2,2.5,0.6],time_from_start:[1.0,0.0]}]}' -1
+$ rostopic pub /arm_controller/command trajectory_msgs/JointTrajectory '{joint_names: ["p0_joint","p1_joint","p2_joint","p3_joint"], points: [{positions: [-1.2,2.5,0.6,0.0],time_from_start:[1.0,0.0]}]}' -1
 ```
 
 To extend the arm:
 ```bash
-$ rostopic pub /arm_controller/command trajectory_msgs/JointTrajectory '{joint_names: ["p0_joint","p1_joint","p2_joint"], points: [{positions: [1.2,0.2,0.6],time_from_start:[1.0,0.0]}]}' -1
+$ rostopic pub /arm_controller/command trajectory_msgs/JointTrajectory '{joint_names: ["p0_joint","p1_joint","p2_joint","p3_joint"], points: [{positions: [1.2,0.2,0.6,0.0],time_from_start:[1.0,0.0]}]}' -1
 ```
 
 ### Via *Rviz*
