@@ -35,6 +35,7 @@ A RGBD (Depth) Camera is mounted at the end of the robot arm. :camera:
 ```
 Camera Resolution: 320 X 240
 Image Range: 0.01 - 18.0m
+Field of View (FOV, Horizontal): 60°
 ```
 
 ## File structure
